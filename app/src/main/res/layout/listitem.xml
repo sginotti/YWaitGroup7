@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="84dp">
+
+    <ImageView
+        android:id="@+id/imageViewEstPic"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/textViewEstName"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageViewEstPic"
+        android:layout_toEndOf="@+id/imageViewEstPic"
+        android:layout_toRightOf="@+id/imageViewEstPic"
+        android:text="Establishment"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewDist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewEstName"
+        android:layout_alignStart="@+id/textViewEstName"
+        android:layout_below="@+id/textViewEstName"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp"
+        android:text="Distance:" />
+
+    <TextView
+        android:id="@+id/textViewWait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewDist"
+        android:layout_alignStart="@+id/textViewDist"
+        android:layout_below="@+id/textViewDist"
+        android:text="Wait Time:" />
+
+    <TextView
+        android:id="@+id/textViewRDist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewEstName"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_toEndOf="@+id/textViewWait"
+        android:layout_toRightOf="@+id/textViewWait"
+        android:text="--" />
+
+    <TextView
+        android:id="@+id/textViewRWait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textViewRDist"
+        android:layout_alignRight="@+id/textViewRDist"
+        android:layout_below="@+id/textViewRDist"
+        android:text="--" />
+
+    <Button
+        android:id="@+id/buttonGo"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignBottom="@+id/textViewRWait"
+        android:layout_alignTop="@+id/textViewEstName"
+        android:layout_toEndOf="@+id/textViewEstName"
+        android:layout_toRightOf="@+id/textViewEstName"
+        android:background="@android:color/holo_blue_dark"
+        android:text=">>"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</RelativeLayout>

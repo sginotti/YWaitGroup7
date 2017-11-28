@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <ImageView
+            android:id="@+id/imageViewPic"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageViewPic"
+            android:layout_toEndOf="@+id/imageViewPic"
+            android:layout_toRightOf="@+id/imageViewPic"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textViewWT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewName"
+            android:layout_alignStart="@+id/textViewName"
+            android:layout_below="@+id/textViewName"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp"
+            android:text="Wait Time:" />
+
+        <TextView
+            android:id="@+id/textViewNoPeep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewWT"
+            android:layout_alignStart="@+id/textViewWT"
+            android:layout_below="@+id/textViewWT"
+            android:text="Number of People:" />
+
+        <TextView
+            android:id="@+id/textViewRWT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewName"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp"
+            android:layout_toEndOf="@+id/textViewNoPeep"
+            android:layout_toRightOf="@+id/textViewNoPeep"
+            android:text="--" />
+
+        <TextView
+            android:id="@+id/textViewRNP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textViewRWT"
+            android:layout_alignRight="@+id/textViewRWT"
+            android:layout_below="@+id/textViewRWT"
+            android:text="--" />
+
+        <TextView
+            android:id="@+id/textViewPostTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageViewPic"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="TextView" />
+
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

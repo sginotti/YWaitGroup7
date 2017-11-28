@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ActivityHome" />
+        <activity android:name=".ActivityEstPage" />
+        <activity android:name=".ActivityContribute" />
+        <activity android:name=".ActivityAcct"></activity>
     </application>
 
 </manifest>
