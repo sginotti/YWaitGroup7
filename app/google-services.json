@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "529918928923",
+    "firebase_url": "https://ywaitgroup7.firebaseio.com",
+    "project_id": "ywaitgroup7",
+    "storage_bucket": "ywaitgroup7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529918928923:android:71a4822235ca66c7",
+        "android_client_info": {
+          "package_name": "com.example.sophia.ywaitgroup7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529918928923-73uel78sgppi9nse2k7j25h7gjfhvlk0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sophia.ywaitgroup7",
+            "certificate_hash": "e314911ac4dfa8855fc6ba10aa157ad6efb63d91"
+          }
+        },
+        {
+          "client_id": "529918928923-sd3icprcm0277m42ethh9vncrpbc34e9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsJjdlhhFqtSUDkBpauqKMKd0-iVeIYBY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529918928923-sd3icprcm0277m42ethh9vncrpbc34e9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
