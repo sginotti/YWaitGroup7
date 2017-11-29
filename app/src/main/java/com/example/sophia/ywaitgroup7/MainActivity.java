@@ -53,7 +53,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         if (view.getId() == R.id.buttonMainSubmit){
             Intent intentLogin = new Intent(this, ActivityHome.class);
             this.startActivity(intentLogin);
-    } else if ((view.getId() == R.id.buttonFacebook) || (view.getId() == R.id.buttonGoogle)){
+        } else if ((view.getId() == R.id.buttonFacebook) || (view.getId() == R.id.buttonGoogle)){
             new AlertDialog.Builder(this)
                     .setMessage("Coming Soon to a TO Class Near You!")
                     .setNeutralButton("Okay",
@@ -68,17 +68,3 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
 }
 
-    //@Override
-    //protected Dialog onCreateDialog(int id) {
-    //    Dialog alertDialog = new AlertDialog.Builder(this)
-    //            .setMessage("Coming Soon")
-      //          .setNeutralButton("Okay",
-        //                new DialogInterface.OnClickListener() {
-          //                  @Override
-            //                public void onClick(DialogInterface dialogInterface, int i) {
-              //                  dialogInterface.cancel();
-                //            }
-                  //      })
-                //.show();
-        //return super.onCreateDialog(id);
-    //}

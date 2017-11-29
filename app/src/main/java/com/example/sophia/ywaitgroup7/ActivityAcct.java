@@ -1,18 +1,73 @@
 package com.example.sophia.ywaitgroup7;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class ActivityAcct extends Activity {
+public class ActivityAcct extends Activity implements View.OnClickListener{
+
+    private ImageView imageViewUserPic;
+    private TextView textViewUserName;
+    private Button buttonChgName;
+    private Button buttonChgPassword;
+    private Button buttonFavorites;
+    private Button buttonCheers;
+    private Button buttonDiscounts;
+    private Button buttonPastActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acct);
+
+        imageViewUserPic = (ImageView)findViewById(R.id.imageViewUserPic);
+        textViewUserName = (TextView) findViewById(R.id.textViewUserName);
+        buttonChgName = (Button) findViewById(R.id.buttonChgName);
+        buttonChgPassword = (Button) findViewById(R.id.buttonChgPassword);
+        buttonFavorites = (Button) findViewById(R.id.buttonFavorites);
+        buttonCheers = (Button) findViewById(R.id.buttonCheers);
+        buttonDiscounts = (Button) findViewById(R.id.buttonDiscounts);
+        buttonPastActivity = (Button) findViewById(R.id.buttonPastActivity);
+
+        buttonChgName.setOnClickListener(this);
+        buttonChgPassword.setOnClickListener(this);
+        buttonFavorites.setOnClickListener(this);
+        buttonCheers.setOnClickListener(this);
+        buttonDiscounts.setOnClickListener(this);
+        buttonPastActivity.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.buttonChgName) {
+
+        } else if (view.getId() == R.id.buttonChgPassword) {
+
+
+        } else if ((view.getId() == R.id.buttonFavorites) || (view.getId() == R.id.buttonCheers) ||
+                (view.getId() == R.id.buttonDiscounts) || (view.getId() == R.id.buttonPastActivity)) {
+            new AlertDialog.Builder(this)
+                    .setMessage("Coming Soon to a TO Class Near You!")
+                    .setNeutralButton("Okay",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            })
+                    .show();
+
+        }
     }
 
     @Override
@@ -37,7 +92,8 @@ public class ActivityAcct extends Activity {
             this.startActivity(intentLogout);
         }
 
-
         return super.onOptionsItemSelected(item);
     }
+
+
 }

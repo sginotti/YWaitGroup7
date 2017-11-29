@@ -30,7 +30,7 @@
                 android:layout_height="103dp"
                 android:layout_margin="10dp"
                 android:gravity="center_vertical"
-                android:text="Rick's All American Cafe"
+                android:text="Establishment Name"
                 android:textSize="30sp"
                 android:textStyle="bold"/>
 

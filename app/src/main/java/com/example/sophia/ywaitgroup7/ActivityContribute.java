@@ -28,7 +28,8 @@ public class ActivityContribute extends Activity implements View.OnClickListener
     private ImageButton imageButtonMedia;
     private Button buttonContSubmit;
     private Button buttonCancel;
-
+    private TextView textViewMins;
+    private TextView textViewPeeps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class ActivityContribute extends Activity implements View.OnClickListener
         buttonContSubmit.setOnClickListener(this);
         buttonCancel.setOnClickListener(this);
         imageButtonMedia.setOnClickListener(this);
+        seekbarWT();
+        seekbarPeeps();
     }
 
     @Override
@@ -71,6 +74,66 @@ public class ActivityContribute extends Activity implements View.OnClickListener
                     .show();
         }
     }
+
+
+   public void seekbarWT(){
+        seekBarWaitTime = (SeekBar) findViewById(R.id.seekBarWaitTime);
+        textViewMins = (TextView) findViewById(R.id.textViewMins);
+        textViewMins.setText(seekBarWaitTime.getProgress() + " Mins");
+
+        seekBarWaitTime.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+
+                    int progress_value;
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        progress_value = i;
+                        textViewMins.setText(i + " Mins");
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        textViewMins.setText(progress_value + " Mins");
+                    }
+                }
+        );
+   }
+
+    public void seekbarPeeps(){
+        seekBarPeepNum = (SeekBar) findViewById(R.id.seekBarPeepNum);
+        textViewPeeps = (TextView) findViewById(R.id.textViewPeeps);
+        textViewPeeps.setText(seekBarPeepNum.getProgress() + " People");
+
+        seekBarPeepNum.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+
+                    int progress_value;
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        progress_value = i;
+                        textViewPeeps.setText(i + " People");
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        textViewPeeps.setText(progress_value + " People");
+                    }
+                }
+        );
+    }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

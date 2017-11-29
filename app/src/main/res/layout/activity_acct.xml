@@ -6,4 +6,107 @@
     android:layout_height="match_parent"
     tools:context="com.example.sophia.ywaitgroup7.ActivityAcct">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewUserPic"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_marginTop="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/textViewUserName"
+                android:text="User Name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="24sp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+                <Button
+                    android:id="@+id/buttonChgName"
+                    android:text="Change Name"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@android:color/background_dark"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/buttonChgPassword"
+                    android:text="Change Password"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@android:color/background_dark"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp">
+
+
+            <Button
+                android:id="@+id/buttonFavorites"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:layout_width="170dp"
+                android:layout_height="90dp"
+                android:text="Favorite Establishments"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/buttonCheers"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:layout_width="170dp"
+                android:layout_height="90dp"
+                android:layout_column="1"
+                android:layout_row="0"
+                android:text="Track Cheers Points" />
+
+            <Button
+                android:id="@+id/buttonPastActivity"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:layout_width="170dp"
+                android:layout_height="90dp"
+                android:layout_column="1"
+                android:layout_row="1"
+                android:text="Past yWait Activity" />
+
+            <Button
+                android:id="@+id/buttonDiscounts"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:layout_width="170dp"
+                android:layout_height="90dp"
+                android:layout_column="0"
+                android:layout_row="1"
+                android:text="Earned   Discounts" />
+        </GridLayout>
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

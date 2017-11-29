@@ -70,7 +70,6 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
             this.startActivity(intentLogout);
         }
 
-
         return super.onOptionsItemSelected(item);
     }
 }
