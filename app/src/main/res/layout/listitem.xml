@@ -13,6 +13,8 @@
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
+        android:maxHeight="60dp"
+        android:maxWidth="60dp"
         android:src="@mipmap/ic_launcher_round" />
 
     <TextView
@@ -65,7 +67,7 @@
         android:layout_below="@+id/textViewRDist"
         android:text="--" />
 
-    <Button
+    <TextView
         android:id="@+id/buttonGo"
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -73,9 +75,7 @@
         android:layout_alignTop="@+id/textViewEstName"
         android:layout_toEndOf="@+id/textViewEstName"
         android:layout_toRightOf="@+id/textViewEstName"
-        android:background="@android:color/holo_blue_dark"
         android:text=">>"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:gravity="center"
+        android:textSize="30sp" />
 </RelativeLayout>

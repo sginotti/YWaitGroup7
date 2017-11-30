@@ -61,7 +61,7 @@
             <SeekBar
                 android:id="@+id/seekBarWaitTime"
                 android:layout_width="300dp"
-                android:max="200"
+                android:max="180"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/textViewMins"

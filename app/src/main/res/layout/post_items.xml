@@ -17,6 +17,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
+            android:maxHeight="60dp"
+            android:maxWidth="60dp"
             android:src="@mipmap/ic_launcher_round" />
 
         <TextView
@@ -78,6 +80,16 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:text="TextView" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCheers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textViewPostTime"
+            android:layout_alignRight="@+id/textViewPostTime"
+            android:layout_alignTop="@+id/textViewName"
+            android:text="Cheers"
+            android:textSize="14sp" />
 
 
     </RelativeLayout>

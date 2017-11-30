@@ -1,6 +1,8 @@
 package com.example.sophia.ywaitgroup7;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +26,8 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
     private TextView textViewWaitNum;
     private TextView textViewPeepNum;
     private Button buttonJoinLine;
-    // private ListView??
+    private ImageButton imageButtonFavorite;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +41,29 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
         textViewWaitNum = (TextView) findViewById(R.id.textViewWaitNum);
         textViewPeepNum = (TextView) findViewById(R.id.textViewPeepNum);
         buttonJoinLine = (Button) findViewById(R.id.buttonJoinLine);
-        //ListView ??
+        imageButtonFavorite = (ImageButton) findViewById(R.id.imageButtonFavorite);
 
         buttonJoinLine.setOnClickListener(this);
+        imageButtonFavorite.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-       Intent intentContribute = new Intent(this, ActivityContribute.class);
-       this.startActivity(intentContribute);
+       if (view.getId() == R.id.buttonJoinLine) {
+           Intent intentContribute = new Intent(this, ActivityContribute.class);
+           this.startActivity(intentContribute);
+       } else if (view.getId() == R.id.imageButtonFavorite){
+           new AlertDialog.Builder(this)
+                   .setMessage("Coming Soon to a TO Class Near You!")
+                   .setNeutralButton("Okay",
+                           new DialogInterface.OnClickListener() {
+                               @Override
+                               public void onClick(DialogInterface dialogInterface, int i) {
+                                   dialogInterface.cancel();
+                               }
+                           })
+                   .show();
+       }
     }
 
     @Override

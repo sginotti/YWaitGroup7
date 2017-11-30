@@ -104,15 +104,31 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/buttonJoinLine"
-            android:layout_width="179dp"
-            android:layout_height="wrap_content"
-            android:text="Join the Line"
-            android:background="@android:color/holo_blue_dark"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/imageButtonFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:src="@android:drawable/star_big_off"
+                android:background="@android:color/white"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/buttonJoinLine"
+                android:layout_width="179dp"
+                android:layout_height="wrap_content"
+                android:text="Join the Line"
+                android:background="@android:color/holo_blue_dark"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="35dp"/>
+
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"

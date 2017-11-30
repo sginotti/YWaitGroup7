@@ -60,7 +60,7 @@
 
         <Button
             android:id="@+id/buttonMainSubmit"
-            android:layout_width="121dp"
+            android:layout_width="150dp"
             android:layout_height="48dp"
             android:background="@android:color/holo_blue_dark"
             android:text="Submit"
@@ -81,7 +81,7 @@
                 android:id="@+id/buttonGoogle"
                 android:layout_width="105dp"
                 android:layout_height="51dp"
-                android:backgroundTint="@android:color/holo_blue_dark"
+                android:backgroundTint="@android:color/background_dark"
                 android:text="Google"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -94,7 +94,7 @@
                 android:id="@+id/buttonFacebook"
                 android:layout_width="105dp"
                 android:layout_height="51dp"
-                android:backgroundTint="@android:color/holo_blue_dark"
+                android:backgroundTint="@android:color/background_dark"
                 android:text="Facebook"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -107,9 +107,9 @@
 
         <Button
             android:id="@+id/buttonCrtAcct"
-            android:layout_width="152dp"
+            android:layout_width="150dp"
             android:layout_height="51dp"
-            android:backgroundTint="@android:color/holo_blue_dark"
+            android:background="@android:color/holo_blue_dark"
             android:text="Create Account"
             android:textColor="@android:color/white"
             android:textAlignment="center"
