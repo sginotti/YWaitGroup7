@@ -10,9 +10,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -27,6 +31,12 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
     private TextView textViewPeepNum;
     private Button buttonJoinLine;
     private ImageButton imageButtonFavorite;
+    private ListView listViewPosts;
+
+    private String[] NAMES = {"User 1", "User 2", "User 3", "User 4", "User 5" };
+    private String[] WAIT = {"40min", "30min", "50min", "20min", "30min"};
+    private String[] PEEPS = {"100", "150", "90", "100", "125"};
+    private String[] TIME = {"2min ago","4min ago","10min ago", "20min ago", "30min ago"};
 
 
     @Override
@@ -42,10 +52,55 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
         textViewPeepNum = (TextView) findViewById(R.id.textViewPeepNum);
         buttonJoinLine = (Button) findViewById(R.id.buttonJoinLine);
         imageButtonFavorite = (ImageButton) findViewById(R.id.imageButtonFavorite);
+        listViewPosts = (ListView) findViewById(R.id.listViewPosts);
 
         buttonJoinLine.setOnClickListener(this);
         imageButtonFavorite.setOnClickListener(this);
+
+        PostAdapter postAdapter = new PostAdapter();
+        listViewPosts.setAdapter(postAdapter);
     }
+
+    class PostAdapter extends BaseAdapter{
+        @Override
+        public int getCount() {
+            return NAMES.length;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+
+            view = getLayoutInflater().inflate(R.layout.post_items, null);
+            ImageView imageViewPic = view.findViewById(R.id.imageViewPic);
+            TextView textViewName = view.findViewById(R.id.textViewName);
+            TextView textViewWT = view.findViewById(R.id.textViewWT);
+            TextView textViewNoPeep = view.findViewById(R.id.textViewNoPeep);
+            TextView textViewRWT = view.findViewById(R.id.textViewRWT);
+            TextView textViewRNP = view.findViewById(R.id.textViewRNP);
+            TextView textViewPostTime = view.findViewById(R.id.textViewPostTime);
+            CheckBox checkBoxCheers = view.findViewById(R.id.checkBoxCheers);
+
+            textViewName.setText(NAMES[i]);
+            textViewWT.setText("Wait Time: ");
+            textViewNoPeep.setText("Number of People: ");
+            textViewRWT.setText(WAIT[i]);
+            textViewRNP.setText(PEEPS[i]);
+            textViewPostTime.setText(TIME[i]);
+
+            return view;
+        }
+    }
+
 
     @Override
     public void onClick(View view) {

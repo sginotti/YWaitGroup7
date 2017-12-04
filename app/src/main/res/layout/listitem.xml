@@ -68,14 +68,14 @@
         android:text="--" />
 
     <TextView
-        android:id="@+id/buttonGo"
+        android:id="@+id/textViewGo"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_alignBottom="@+id/textViewRWait"
         android:layout_alignTop="@+id/textViewEstName"
         android:layout_toEndOf="@+id/textViewEstName"
         android:layout_toRightOf="@+id/textViewEstName"
-        android:text=">>"
         android:gravity="center"
+        android:text=">>"
         android:textSize="30sp" />
 </RelativeLayout>
