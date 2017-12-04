@@ -15,6 +15,11 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.w3c.dom.Text;
 
 public class ActivityContribute extends Activity implements View.OnClickListener{
@@ -30,6 +35,8 @@ public class ActivityContribute extends Activity implements View.OnClickListener
     private Button buttonCancel;
     private TextView textViewMins;
     private TextView textViewPeeps;
+
+    public int waitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +62,30 @@ public class ActivityContribute extends Activity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        final DatabaseReference recordRef = db.getReference("Mash");
+
         if (view.getId() == R.id.buttonContSubmit) {
+
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser user = mAuth.getCurrentUser();
+            String uid = user.getUid();
+
+            Long tsLong = System.currentTimeMillis()/1000;
+            String ts = tsLong.toString();
+
+            String userName = uid;
+            int waitTime1 = waitTime;
+            String waitPeople = "c";
+            String loginTime = ts;
+
+            Record myRecord = new Record(userName, waitTime1, waitPeople, loginTime);
+            recordRef.child("Data").child(ts).setValue(myRecord);
+
             Intent intentSubmitToEstPage = new Intent(this, ActivityEstPage.class);
             this.startActivity(intentSubmitToEstPage);
+
         } else if (view.getId() == R.id.buttonCancel){
             Intent intentCancel = new Intent(this, ActivityEstPage.class);
             this.startActivity(intentCancel);
@@ -76,32 +104,34 @@ public class ActivityContribute extends Activity implements View.OnClickListener
     }
 
 
+
    public void seekbarWT(){
-        seekBarWaitTime = (SeekBar) findViewById(R.id.seekBarWaitTime);
-        textViewMins = (TextView) findViewById(R.id.textViewMins);
-        textViewMins.setText(seekBarWaitTime.getProgress() + " Mins");
+       seekBarWaitTime = (SeekBar) findViewById(R.id.seekBarWaitTime);
+       textViewMins = (TextView) findViewById(R.id.textViewMins);
+       textViewMins.setText(seekBarWaitTime.getProgress() + " Mins");
 
-        seekBarWaitTime.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
+       seekBarWaitTime.setOnSeekBarChangeListener(
+               new SeekBar.OnSeekBarChangeListener() {
 
-                    int progress_value;
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                        progress_value = i;
-                        textViewMins.setText(i + " Mins");
-                    }
+                   int progress_value;
+                   @Override
+                   public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                       progress_value = i;
+                       textViewMins.setText(i + " Mins");
+                       waitTime = progress_value;
+                   }
 
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
+                   @Override
+                   public void onStartTrackingTouch(SeekBar seekBar) {
 
-                    }
+                   }
 
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-                        textViewMins.setText(progress_value + " Mins");
-                    }
-                }
-        );
+                   @Override
+                   public void onStopTrackingTouch(SeekBar seekBar) {
+                       textViewMins.setText(progress_value + " Mins");
+                   }
+               }
+       );
    }
 
     public void seekbarPeeps(){
