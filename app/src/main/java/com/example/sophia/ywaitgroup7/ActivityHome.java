@@ -36,6 +36,7 @@ public class ActivityHome extends Activity implements View.OnClickListener{
     private String[] NAMES = {"Rick's All American Cafe", "Scorekeeper's", "MASH", "LIVE", "Cantina" };
     private int[] IMAGES = {R.drawable.ricks, R.drawable.skeeps, R.drawable.mash,R.drawable.live,R.drawable.cantina};
 
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
