@@ -36,7 +36,6 @@ public class ActivityHome extends Activity implements View.OnClickListener{
     private String[] NAMES = {"Rick's All American Cafe", "Scorekeeper's", "MASH", "LIVE", "Cantina" };
     private int[] IMAGES = {R.drawable.ricks, R.drawable.skeeps, R.drawable.mash,R.drawable.live,R.drawable.cantina};
 
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +54,6 @@ public class ActivityHome extends Activity implements View.OnClickListener{
 
        //FirebaseDatabase database = FirebaseDatabase.getInstance();
        // DatabaseReference myRef = database.getReference("message");
-
     }
 
     class CustomAdapter extends BaseAdapter {
@@ -63,12 +61,10 @@ public class ActivityHome extends Activity implements View.OnClickListener{
         public int getCount() {
             return NAMES.length;
         }
-
         @Override
         public Object getItem(int i) {
             return null;
         }
-
         @Override
         public long getItemId(int i) {
             return 0;
