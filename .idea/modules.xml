@@ -4,10 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YWaitGroup7.iml" filepath="$PROJECT_DIR$/YWaitGroup7.iml" />
       <module fileurl="file://C:\Users\natal\Desktop\Java\YWaitGroup7\YWaitGroup7.iml" filepath="C:\Users\natal\Desktop\Java\YWaitGroup7\YWaitGroup7.iml" />
-      <module fileurl="file://$PROJECT_DIR$/YWaitGroup7.iml" filepath="$PROJECT_DIR$/YWaitGroup7.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\natal\Desktop\Java\YWaitGroup7\app\app.iml" filepath="C:\Users\natal\Desktop\Java\YWaitGroup7\app\app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>

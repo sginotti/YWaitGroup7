@@ -18,6 +18,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -37,6 +44,9 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
     private String[] WAIT = {"40min", "30min", "50min", "20min", "30min"};
     private String[] PEEPS = {"100", "150", "90", "100", "125"};
     private String[] TIME = {"2min ago","4min ago","10min ago", "20min ago", "30min ago"};
+
+    public Double aveWaitTime, aveWaitPeople;
+    public Double totalWaitTime, totalWaitPeople;
 
 
     @Override
@@ -59,7 +69,47 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
 
         PostAdapter postAdapter = new PostAdapter();
         listViewPosts.setAdapter(postAdapter);
+
+        calWait();
+
     }
+
+    public void calWait () {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        final DatabaseReference mashRef = db.getReference("Mash");
+        totalWaitTime = 0.0;
+
+
+        mashRef.child("Data").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    //Toast.makeText(ActivityEstPage.this, snapshot.child("userName"), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ActivityEstPage.this, "Test", Toast.LENGTH_SHORT).show();
+                    if (snapshot.child("waitTime").getValue() != null) {
+
+                        String wt = snapshot.child("waitTime").getValue().toString();
+                        int foundWaitTime = Integer.parseInt(wt);
+                        i = i +1;
+                        totalWaitTime += foundWaitTime;
+                        Toast.makeText(ActivityEstPage.this, totalWaitTime.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+                aveWaitTime = totalWaitTime / i;
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 
     class PostAdapter extends BaseAdapter{
         @Override
