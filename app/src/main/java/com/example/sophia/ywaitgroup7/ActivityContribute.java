@@ -20,7 +20,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
 public class ActivityContribute extends Activity implements View.OnClickListener{
 
@@ -36,7 +38,7 @@ public class ActivityContribute extends Activity implements View.OnClickListener
     private TextView textViewMins;
     private TextView textViewPeeps;
 
-    public int waitTime;
+    public int waitTime, waitPeople;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +74,18 @@ public class ActivityContribute extends Activity implements View.OnClickListener
             FirebaseUser user = mAuth.getCurrentUser();
             String uid = user.getUid();
 
-            Long tsLong = System.currentTimeMillis()/1000;
-            String ts = tsLong.toString();
+            //Long tsLong = System.currentTimeMillis()/1000;
+            //String ts = tsLong.toString();
+
+            String ts = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
 
             String userName = uid;
             int waitTime1 = waitTime;
-            String waitPeople = "c";
+            int waitPeople1 = waitPeople;
             String loginTime = ts;
 
-            Record myRecord = new Record(userName, waitTime1, waitPeople, loginTime);
+            Record myRecord = new Record(userName, waitTime1, waitPeople1, loginTime);
             recordRef.child("Data").child(ts).setValue(myRecord);
 
             Intent intentSubmitToEstPage = new Intent(this, ActivityEstPage.class);
@@ -147,6 +152,7 @@ public class ActivityContribute extends Activity implements View.OnClickListener
                     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                         progress_value = i;
                         textViewPeeps.setText(i + " People");
+                        waitPeople = progress_value;
                     }
 
                     @Override
