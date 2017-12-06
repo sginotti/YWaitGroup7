@@ -123,7 +123,7 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
                 String msg = String.valueOf(aveWaitTime / 60) + "h " + String.valueOf(aveWaitTime % 60) + "m";
                 textViewWaitNum.setText(msg);
 
-                aveWaitPeople = (int) Math.ceil(totalWaitPeople / i);
+                aveWaitPeople = (int) Math.ceil(totalWaitPeople / j);
                 textViewPeepNum.setText(aveWaitPeople.toString());
 
             }
