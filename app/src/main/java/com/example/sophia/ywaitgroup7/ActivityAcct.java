@@ -49,25 +49,18 @@ public class ActivityAcct extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.buttonChgName) {
 
-        } else if (view.getId() == R.id.buttonChgPassword) {
+        new AlertDialog.Builder(this)
+                .setMessage("Coming Soon to a TO Class Near You!")
+                .setNeutralButton("Okay",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        })
+                .show();
 
-
-        } else if ((view.getId() == R.id.buttonFavorites) || (view.getId() == R.id.buttonCheers) ||
-                (view.getId() == R.id.buttonDiscounts) || (view.getId() == R.id.buttonPastActivity)) {
-            new AlertDialog.Builder(this)
-                    .setMessage("Coming Soon to a TO Class Near You!")
-                    .setNeutralButton("Okay",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.cancel();
-                                }
-                            })
-                    .show();
-
-        }
     }
 
     @Override

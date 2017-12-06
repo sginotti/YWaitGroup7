@@ -82,14 +82,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         String password = editTextPassword.getText().toString();
 
         if (view.getId() == R.id.buttonMainSubmit){
-
-            Intent intentLogin = new Intent(this, ActivityHome.class);
             signIn(email, password);
-
-            if (shortcut== 2) {
-                this.startActivity(intentLogin);
-                shortcut = 1;
-            }
 
         } else if ((view.getId() == R.id.buttonFacebook) || (view.getId() == R.id.buttonGoogle)){
             new AlertDialog.Builder(this)
@@ -133,12 +126,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (!task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Authentication Failed",
+                            Toast.makeText(MainActivity.this, "Login Failed",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(MainActivity.this, "Authentication Successful",
+                            Toast.makeText(MainActivity.this, "Login Successful",
                                     Toast.LENGTH_SHORT).show();
-                            shortcut = 2;
+                            Intent intentLogin = new Intent(getApplicationContext(), ActivityHome.class);
+                            startActivity(intentLogin);
+
                         }
                     }
                 });
