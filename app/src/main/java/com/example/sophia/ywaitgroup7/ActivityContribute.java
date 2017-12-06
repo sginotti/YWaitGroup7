@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,8 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 public class ActivityContribute extends Activity implements View.OnClickListener{
 
@@ -53,9 +52,17 @@ public class ActivityContribute extends Activity implements View.OnClickListener
         buttonContSubmit = (Button) findViewById(R.id.buttonContSubmit);
         buttonCancel = (Button) findViewById(R.id.buttonCancel);
 
+        //Receiving and setting Establishment image and name
+        Bundle extras = getIntent().getExtras();
+        String estname = extras.getString("establishment").toString();
+        Bitmap estpic = (Bitmap) extras.getParcelable("pic");
+        textViewEstName.setText(estname);
+        imageViewEstPic.setImageBitmap(estpic);
+
         buttonContSubmit.setOnClickListener(this);
         buttonCancel.setOnClickListener(this);
         imageButtonMedia.setOnClickListener(this);
+
         seekbarWT();
         seekbarPeeps();
     }
@@ -186,7 +193,6 @@ public class ActivityContribute extends Activity implements View.OnClickListener
             Intent intentLogout = new Intent(this, MainActivity.class);
             this.startActivity(intentLogout);
         }
-
 
         return super.onOptionsItemSelected(item);
     }

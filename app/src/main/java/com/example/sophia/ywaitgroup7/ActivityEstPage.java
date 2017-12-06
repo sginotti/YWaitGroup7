@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +22,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.nio.BufferUnderflowException;
+
 public class ActivityEstPage extends Activity implements View.OnClickListener{
 
     private ImageView imageViewEstPic;
@@ -33,6 +36,7 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
     private ImageButton imageButtonFavorite;
     private ListView listViewPosts;
 
+    //Store of Static information for posts
     private String[] NAMES = {"User 1", "User 2", "User 3", "User 4", "User 5" };
     private String[] WAIT = {"40min", "30min", "50min", "20min", "30min"};
     private String[] PEEPS = {"100", "150", "90", "100", "125"};
@@ -57,6 +61,14 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
         buttonJoinLine.setOnClickListener(this);
         imageButtonFavorite.setOnClickListener(this);
 
+        //Receiving and setting establishment image and name
+        Bundle extras = getIntent().getExtras();
+        String estname = extras.getString("establishment").toString();
+        Integer estpic = extras.getInt("picture");
+        textViewEstName.setText(estname);
+        imageViewEstPic.setImageResource(estpic);
+
+        //Assigns adapter to listview
         PostAdapter postAdapter = new PostAdapter();
         listViewPosts.setAdapter(postAdapter);
     }
@@ -79,7 +91,7 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-
+            //Attaches ListView to UI of Layout
             view = getLayoutInflater().inflate(R.layout.post_items, null);
             ImageView imageViewPic = view.findViewById(R.id.imageViewPic);
             TextView textViewName = view.findViewById(R.id.textViewName);
@@ -89,7 +101,7 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
             TextView textViewRNP = view.findViewById(R.id.textViewRNP);
             TextView textViewPostTime = view.findViewById(R.id.textViewPostTime);
             CheckBox checkBoxCheers = view.findViewById(R.id.checkBoxCheers);
-
+            //Assigns values to each List UI
             textViewName.setText(NAMES[i]);
             textViewWT.setText("Wait Time: ");
             textViewNoPeep.setText("Number of People: ");
@@ -105,8 +117,18 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
        if (view.getId() == R.id.buttonJoinLine) {
+           //Sending information to Contribution Activity
            Intent intentContribute = new Intent(this, ActivityContribute.class);
+           String estabPic = textViewEstName.getText().toString();
+           imageViewEstPic.buildDrawingCache();
+           Bitmap pic = imageViewEstPic.getDrawingCache();
+           Bundle extras = new Bundle();
+           extras.putParcelable("pic",pic);
+           intentContribute.putExtra("establishment", estabPic);
+           intentContribute.putExtras(extras);
+           //intentContribute.putExtra("pic", pic);
            this.startActivity(intentContribute);
+
        } else if (view.getId() == R.id.imageButtonFavorite){
            new AlertDialog.Builder(this)
                    .setMessage("Coming Soon to a TO Class Near You!")

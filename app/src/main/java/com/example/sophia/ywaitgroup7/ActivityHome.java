@@ -8,13 +8,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -52,8 +52,21 @@ public class ActivityHome extends Activity implements View.OnClickListener{
         CustomAdapter customAdapter = new CustomAdapter();
         listViewEstablishments.setAdapter(customAdapter);
 
-       //FirebaseDatabase database = FirebaseDatabase.getInstance();
-       // DatabaseReference myRef = database.getReference("message");
+        //When clicked the program will send information to Establishment page and populate info
+        listViewEstablishments.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intentEst = new Intent(getApplicationContext(), ActivityEstPage.class);
+                String establishment = NAMES[i].toString();
+                Integer picture = IMAGES[i];
+                intentEst.putExtra("establishment", establishment);
+                intentEst.putExtra("picture", picture);
+                startActivity(intentEst);
+            }
+        });
+
+      // FirebaseDatabase database = FirebaseDatabase.getInstance();
+      // DatabaseReference myRef = database.getReference("message");
     }
 
     class CustomAdapter extends BaseAdapter {
@@ -96,6 +109,7 @@ public class ActivityHome extends Activity implements View.OnClickListener{
         }
     }
 
+    //Temporary navigation tool- to be deleted after ListView is clickable
     @Override
     public void onClick(View view) {
         Intent intentEst = new Intent(this, ActivityEstPage.class);
@@ -104,10 +118,8 @@ public class ActivityHome extends Activity implements View.OnClickListener{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater homeMenuInflater = getMenuInflater();
         homeMenuInflater.inflate(R.menu.homemenu, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 
