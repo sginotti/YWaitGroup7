@@ -72,12 +72,14 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
 
         calWait();
 
+
     }
 
     public void calWait () {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         final DatabaseReference mashRef = db.getReference("Mash");
         totalWaitTime = 0.0;
+        totalWaitPeople = 0.0;
 
 
         mashRef.child("Data").addValueEventListener(new ValueEventListener() {
@@ -85,20 +87,44 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    //Toast.makeText(ActivityEstPage.this, snapshot.child("userName"), Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(ActivityEstPage.this, "Test", Toast.LENGTH_SHORT).show();
                     if (snapshot.child("waitTime").getValue() != null) {
 
                         String wt = snapshot.child("waitTime").getValue().toString();
                         int foundWaitTime = Integer.parseInt(wt);
                         i = i +1;
                         totalWaitTime += foundWaitTime;
-                        Toast.makeText(ActivityEstPage.this, totalWaitTime.toString(), Toast.LENGTH_SHORT).show();
 
                     }
 
                 }
                 aveWaitTime = totalWaitTime / i;
+                Toast.makeText(ActivityEstPage.this, aveWaitTime.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mashRef.child("Data").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.child("waitPeople").getValue() != null) {
+
+                        String wp = snapshot.child("waitPeople").getValue().toString();
+                        int foundWaitPeople = Integer.parseInt(wp);
+                        i = i +1;
+                        totalWaitPeople += foundWaitPeople;
+
+                    }
+
+                }
+                aveWaitPeople = totalWaitPeople / i;
+                Toast.makeText(ActivityEstPage.this, aveWaitPeople.toString(), Toast.LENGTH_SHORT).show();
 
             }
 
