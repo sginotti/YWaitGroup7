@@ -5,13 +5,13 @@ package com.example.sophia.ywaitgroup7;
  */
 
 public class Record {
-    public String userName, waitPeople, loginTime;
-    public int waitTime;
+    public String userName, loginTime;
+    public int waitTime, waitPeople;
 
     public Record() {
     }
 
-    public Record(String userName, int waitTime, String waitPeople, String loginTime) {
+    public Record(String userName, int waitTime, int waitPeople, String loginTime) {
         this.userName = userName;
         this.waitTime = waitTime;
         this.waitPeople = waitPeople;
