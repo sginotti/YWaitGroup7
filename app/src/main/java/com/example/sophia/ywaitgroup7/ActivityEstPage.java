@@ -31,6 +31,8 @@ import org.w3c.dom.Text;
 
 import java.nio.BufferUnderflowException;
 
+import static java.lang.Math.ceil;
+
 public class ActivityEstPage extends Activity implements View.OnClickListener{
 
     private ImageView imageViewEstPic;
@@ -49,7 +51,7 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
     private String[] PEEPS = {"100", "150", "90", "100", "125"};
     private String[] TIME = {"2min ago","4min ago","10min ago", "20min ago", "30min ago"};
 
-    public Double aveWaitTime, aveWaitPeople;
+    public Integer aveWaitTime, aveWaitPeople;
     public Double totalWaitTime, totalWaitPeople;
 
 
@@ -98,45 +100,31 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
+                int j = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (snapshot.child("waitTime").getValue() != null) {
 
                         String wt = snapshot.child("waitTime").getValue().toString();
                         int foundWaitTime = Integer.parseInt(wt);
-                        i = i +1;
+                        i = i + 1;
                         totalWaitTime += foundWaitTime;
 
                     }
-
-                }
-                aveWaitTime = totalWaitTime / i;
-                Toast.makeText(ActivityEstPage.this, aveWaitTime.toString(), Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        mashRef.child("Data").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int i = 0;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (snapshot.child("waitPeople").getValue() != null) {
 
                         String wp = snapshot.child("waitPeople").getValue().toString();
                         int foundWaitPeople = Integer.parseInt(wp);
-                        i = i +1;
+                        j = j + 1;
                         totalWaitPeople += foundWaitPeople;
-
                     }
 
                 }
-                aveWaitPeople = totalWaitPeople / i;
-                Toast.makeText(ActivityEstPage.this, aveWaitPeople.toString(), Toast.LENGTH_SHORT).show();
+                aveWaitTime = (int) Math.ceil(totalWaitTime / i);
+                String msg = String.valueOf(aveWaitTime / 60) + "h " + String.valueOf(aveWaitTime % 60) + "m";
+                textViewWaitNum.setText(msg);
+
+                aveWaitPeople = (int) Math.ceil(totalWaitPeople / i);
+                textViewPeepNum.setText(aveWaitPeople.toString());
 
             }
 

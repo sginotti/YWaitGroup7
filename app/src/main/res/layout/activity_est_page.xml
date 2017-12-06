@@ -31,8 +31,9 @@
                 android:layout_margin="10dp"
                 android:gravity="center_vertical"
                 android:text="Establishment Name"
+                android:textAlignment="viewStart"
                 android:textSize="30sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -50,10 +51,10 @@
                 android:id="@+id/textViewWaitDesc"
                 android:layout_width="160dp"
                 android:layout_height="50dp"
-                android:text="Total Estimated Wait Time"
+                android:text="Estimated Wait Time"
                 android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <Space
                 android:layout_width="20dp"
@@ -63,10 +64,10 @@
                 android:id="@+id/textViewPeepDesc"
                 android:layout_width="160dp"
                 android:layout_height="50dp"
-                android:text="Number of People Waiting Now"
+                android:text="People Waiting   Now"
                 android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
@@ -80,8 +81,8 @@
                 android:id="@+id/textViewWaitNum"
                 android:layout_width="160dp"
                 android:layout_height="105dp"
-                android:text="TextView"
                 android:gravity="center"
+                android:text="45m"
                 android:textAllCaps="false"
                 android:textColor="@android:color/holo_green_dark"
                 android:textIsSelectable="false"
@@ -97,9 +98,9 @@
                 android:id="@+id/textViewPeepNum"
                 android:layout_width="160dp"
                 android:layout_height="105dp"
-                android:textColor="@android:color/holo_green_dark"
-                android:text="TextView"
                 android:gravity="center"
+                android:text="5"
+                android:textColor="@android:color/holo_green_dark"
                 android:textSize="30sp"
                 android:textStyle="bold" />
         </LinearLayout>
