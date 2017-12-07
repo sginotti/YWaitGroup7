@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.nio.BufferUnderflowException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import static java.lang.Math.ceil;
 
@@ -84,19 +87,72 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
         PostAdapter postAdapter = new PostAdapter();
         listViewPosts.setAdapter(postAdapter);
 
-        calWait();
+        calWait(300);
 
 
     }
 
-    public void calWait () {
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        final DatabaseReference mashRef = db.getReference("Mash");
+    public void calWait (long offset) {
         totalWaitTime = 0.0;
         totalWaitPeople = 0.0;
+        final long time = System.currentTimeMillis()/1000 - offset;
 
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        final DatabaseReference mashRef = db.getReference("Mash");
 
-        mashRef.child("Data").addValueEventListener(new ValueEventListener() {
+        mashRef.child("Data2").orderByChild("loginTime").startAt(time).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                int j = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.child("waitTime").getValue() != null) {
+
+                        String wt = snapshot.child("waitTime").getValue().toString();
+                        int foundWaitTime = Integer.parseInt(wt);
+                        i = i + 1;
+                        totalWaitTime += foundWaitTime;
+
+                    }
+                    if (snapshot.child("waitPeople").getValue() != null) {
+
+                        String wp = snapshot.child("waitPeople").getValue().toString();
+                        int foundWaitPeople = Integer.parseInt(wp);
+                        j = j + 1;
+                        totalWaitPeople += foundWaitPeople;
+                    }
+
+                }
+                // if no fresh records (see offet)
+                // then checking all the records made in the last week
+                if ((totalWaitTime == 0) | (totalWaitPeople == 0)) {
+                    calWait(60*60*24*7);
+                } else {
+                    aveWaitTime = (int) Math.ceil(totalWaitTime / i);
+                    String msg = String.valueOf(aveWaitTime / 60) + "h " + String.valueOf(aveWaitTime % 60) + "m";
+                    textViewWaitNum.setText(msg);
+
+                    aveWaitPeople = (int) Math.ceil(totalWaitPeople / j);
+                    textViewPeepNum.setText(aveWaitPeople.toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+/*    public void calWait () {
+        totalWaitTime = 0.0;
+        totalWaitPeople = 0.0;
+        final long time = System.currentTimeMillis()/1000 - 1800; // half an hour ago
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        final DatabaseReference mashRef = db.getReference("Mash");
+
+        mashRef.child("Data2").orderByChild("loginTime").startAt(time).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
@@ -133,8 +189,7 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
 
             }
         });
-    }
-
+    }*/
 
 
     class PostAdapter extends BaseAdapter{

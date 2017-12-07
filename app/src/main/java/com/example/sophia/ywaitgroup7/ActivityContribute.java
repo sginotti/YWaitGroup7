@@ -74,26 +74,19 @@ public class ActivityContribute extends Activity implements View.OnClickListener
             FirebaseUser user = mAuth.getCurrentUser();
             String uid = user.getUid();
 
-            //Long tsLong = System.currentTimeMillis()/1000;
-            //String ts = tsLong.toString();
 
-            String ts = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            //String ts = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            //Double dblTimestamp = Double.parseDouble(ts.replace("_", ""));
+            long longTimestamp = System.currentTimeMillis()/1000;
 
+            Record myRecord = new Record(uid, waitTime, waitPeople, longTimestamp);
+            //recordRef.child("Data").child(ts).setValue(myRecord);
+            recordRef.child("Data2").push().setValue(myRecord);
 
-            String userName = uid;
-            int waitTime1 = waitTime;
-            int waitPeople1 = waitPeople;
-            String loginTime = ts;
-
-            Record myRecord = new Record(userName, waitTime1, waitPeople1, loginTime);
-            recordRef.child("Data").child(ts).setValue(myRecord);
-
-            Intent intentSubmitToEstPage = new Intent(this, ActivityEstPage.class);
-            this.startActivity(intentSubmitToEstPage);
+            startActivity(new Intent(ActivityContribute.this, ActivityEstPage.class));
 
         } else if (view.getId() == R.id.buttonCancel){
-            Intent intentCancel = new Intent(this, ActivityEstPage.class);
-            this.startActivity(intentCancel);
+            startActivity(new Intent(ActivityContribute.this, ActivityEstPage.class));
         } else if (view.getId() == R.id.imageButtonMedia){
             new AlertDialog.Builder(this)
                     .setMessage("Coming Soon to a TO Class Near You!")
@@ -107,7 +100,6 @@ public class ActivityContribute extends Activity implements View.OnClickListener
                     .show();
         }
     }
-
 
 
    public void seekbarWT(){

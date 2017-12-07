@@ -82,7 +82,7 @@
                 android:layout_width="160dp"
                 android:layout_height="105dp"
                 android:gravity="center"
-                android:text="45m"
+                android:text="n/a"
                 android:textAllCaps="false"
                 android:textColor="@android:color/holo_green_dark"
                 android:textIsSelectable="false"
@@ -99,7 +99,7 @@
                 android:layout_width="160dp"
                 android:layout_height="105dp"
                 android:gravity="center"
-                android:text="5"
+                android:text="n/a"
                 android:textColor="@android:color/holo_green_dark"
                 android:textSize="30sp"
                 android:textStyle="bold" />
