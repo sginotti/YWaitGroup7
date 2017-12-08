@@ -81,14 +81,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
         String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();
 
-        if (email.equals("")) {
+        /*if (email.equals("")) {
             Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
         } else {
             if (password.equals("")) {
                 Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
-            } else {
+            } else {*/
                 if (view.getId() == R.id.buttonMainSubmit){
-                    signIn(email, password);
+                    Intent intentLogin = new Intent(getApplicationContext(), ActivityHome.class);
+                    startActivity(intentLogin);
+                    //signIn(email, password);
                 } else if ((view.getId() == R.id.buttonFacebook) || (view.getId() == R.id.buttonGoogle)){
                     new AlertDialog.Builder(this)
                             .setMessage("Coming Soon to a TO Class Near You!")
@@ -104,8 +106,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     createAccount(email, password);
                 }
             }
-        }
-    }
+        //}
+    //}
 
     public void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)

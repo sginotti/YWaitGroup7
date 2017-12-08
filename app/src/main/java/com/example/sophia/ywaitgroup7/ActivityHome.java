@@ -30,11 +30,14 @@ public class ActivityHome extends Activity implements View.OnClickListener{
     private Button buttonWaitSort;
     private ListView listViewEstablishments;
 
+    public static String keepName;
+    public static Integer keepNumber;
+
     //ArrayList<String> list = new ArrayList<>();
     //ArrayAdapter<String> adapter;
 
-    private String[] NAMES = {"Rick's All American Cafe", "Scorekeeper's", "MASH", "LIVE", "Cantina" };
-    private int[] IMAGES = {R.drawable.ricks, R.drawable.skeeps, R.drawable.mash,R.drawable.live,R.drawable.cantina};
+    public String[] NAMES = {"Rick's All American Cafe", "Scorekeeper's", "MASH", "LIVE", "Cantina" };
+    public int[] IMAGES = {R.drawable.ricks, R.drawable.skeeps, R.drawable.mash,R.drawable.live,R.drawable.cantina};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +60,10 @@ public class ActivityHome extends Activity implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intentEst = new Intent(getApplicationContext(), ActivityEstPage.class);
-                String establishment = NAMES[i].toString();
-                Integer picture = IMAGES[i];
-                intentEst.putExtra("establishment", establishment);
-                intentEst.putExtra("picture", picture);
+                keepName = NAMES[i].toString();
+                keepNumber = IMAGES[i];
+                //intentEst.putExtra("establishment", establishment);
+                //intentEst.putExtra("picture", picture);
                 startActivity(intentEst);
             }
         });

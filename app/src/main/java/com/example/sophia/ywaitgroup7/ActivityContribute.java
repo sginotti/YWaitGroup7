@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+
+import javax.sql.RowSetReader;
 
 public class ActivityContribute extends Activity implements View.OnClickListener{
 
@@ -55,15 +58,22 @@ public class ActivityContribute extends Activity implements View.OnClickListener
         buttonContSubmit = (Button) findViewById(R.id.buttonContSubmit);
         buttonCancel = (Button) findViewById(R.id.buttonCancel);
 
+        //Assigns Picture and Name per Selected Item
+        textViewEstName.setText(ActivityHome.keepName);
+        imageViewEstPic.setImageResource(ActivityHome.keepNumber);
+
         buttonContSubmit.setOnClickListener(this);
         buttonCancel.setOnClickListener(this);
         imageButtonMedia.setOnClickListener(this);
+
         seekbarWT();
         seekbarPeeps();
     }
 
     @Override
     public void onClick(View view) {
+
+        //String estNode = textViewEstName.getText().toString();
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         final DatabaseReference recordRef = db.getReference("Mash");
@@ -73,7 +83,6 @@ public class ActivityContribute extends Activity implements View.OnClickListener
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             FirebaseUser user = mAuth.getCurrentUser();
             String uid = user.getUid();
-
 
             //String ts = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             //Double dblTimestamp = Double.parseDouble(ts.replace("_", ""));
@@ -86,7 +95,8 @@ public class ActivityContribute extends Activity implements View.OnClickListener
             startActivity(new Intent(ActivityContribute.this, ActivityEstPage.class));
 
         } else if (view.getId() == R.id.buttonCancel){
-            startActivity(new Intent(ActivityContribute.this, ActivityEstPage.class));
+            Intent intentCancel = new Intent(this, ActivityEstPage.class);
+            this.startActivity(intentCancel);
         } else if (view.getId() == R.id.imageButtonMedia){
             new AlertDialog.Builder(this)
                     .setMessage("Coming Soon to a TO Class Near You!")

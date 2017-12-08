@@ -57,7 +57,6 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
     public Integer aveWaitTime, aveWaitPeople;
     public Double totalWaitTime, totalWaitPeople;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,23 +72,18 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
         imageButtonFavorite = (ImageButton) findViewById(R.id.imageButtonFavorite);
         listViewPosts = (ListView) findViewById(R.id.listViewPosts);
 
+        //Assigns Picture and Name per Selected Item
+        textViewEstName.setText(ActivityHome.keepName);
+        imageViewEstPic.setImageResource(ActivityHome.keepNumber);
+
         buttonJoinLine.setOnClickListener(this);
         imageButtonFavorite.setOnClickListener(this);
-
-        //Receiving and setting establishment image and name
-        Bundle extras = getIntent().getExtras();
-        String estname = extras.getString("establishment").toString();
-        Integer estpic = extras.getInt("picture");
-        textViewEstName.setText(estname);
-        imageViewEstPic.setImageResource(estpic);
 
         //Assigns adapter to listview
         PostAdapter postAdapter = new PostAdapter();
         listViewPosts.setAdapter(postAdapter);
 
         calWait(300);
-
-
     }
 
     public void calWait (long offset) {
@@ -112,10 +106,8 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
                         int foundWaitTime = Integer.parseInt(wt);
                         i = i + 1;
                         totalWaitTime += foundWaitTime;
-
                     }
                     if (snapshot.child("waitPeople").getValue() != null) {
-
                         String wp = snapshot.child("waitPeople").getValue().toString();
                         int foundWaitPeople = Integer.parseInt(wp);
                         j = j + 1;
@@ -143,6 +135,87 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
             }
         });
     }
+
+    class PostAdapter extends BaseAdapter{
+        @Override
+        public int getCount() {
+            return NAMES.length;
+        }
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            //Attaches ListView to UI of Layout
+            view = getLayoutInflater().inflate(R.layout.post_items, null);
+            ImageView imageViewPic = view.findViewById(R.id.imageViewPic);
+            TextView textViewName = view.findViewById(R.id.textViewName);
+            TextView textViewWT = view.findViewById(R.id.textViewWT);
+            TextView textViewNoPeep = view.findViewById(R.id.textViewNoPeep);
+            TextView textViewRWT = view.findViewById(R.id.textViewRWT);
+            TextView textViewRNP = view.findViewById(R.id.textViewRNP);
+            TextView textViewPostTime = view.findViewById(R.id.textViewPostTime);
+            CheckBox checkBoxCheers = view.findViewById(R.id.checkBoxCheers);
+            //Assigns values to each List UI
+            textViewName.setText(NAMES[i]);
+            textViewWT.setText("Wait Time: ");
+            textViewNoPeep.setText("Number of People: ");
+            textViewRWT.setText(WAIT[i]);
+            textViewRNP.setText(PEEPS[i]);
+            textViewPostTime.setText(TIME[i]);
+
+            return view;
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+       if (view.getId() == R.id.buttonJoinLine) {
+           Intent intentContribute = new Intent(this, ActivityContribute.class);
+           this.startActivity(intentContribute);
+
+       } else if (view.getId() == R.id.imageButtonFavorite){
+           new AlertDialog.Builder(this)
+                   .setMessage("Coming Soon to a TO Class Near You!")
+                   .setNeutralButton("Okay",
+                           new DialogInterface.OnClickListener() {
+                               @Override
+                               public void onClick(DialogInterface dialogInterface, int i) {
+                                   dialogInterface.cancel();
+                               }
+                           })
+                   .show();
+       }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater mainMenuInflator = getMenuInflater();
+        mainMenuInflator.inflate(R.menu.mainmenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menuHome) {
+            Intent intentHome = new Intent(this, ActivityHome.class);
+            this.startActivity(intentHome);
+        } else if (item.getItemId() == R.id.menuAcct) {
+            Intent intentAcct = new Intent(this, ActivityAcct.class);
+            this.startActivity(intentAcct);
+        } else if (item.getItemId() == R.id.menuLogout) {
+            Intent intentLogout = new Intent(this, MainActivity.class);
+            this.startActivity(intentLogout);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}
 
 /*    public void calWait () {
         totalWaitTime = 0.0;
@@ -190,100 +263,3 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
             }
         });
     }*/
-
-
-    class PostAdapter extends BaseAdapter{
-        @Override
-        public int getCount() {
-            return NAMES.length;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            //Attaches ListView to UI of Layout
-            view = getLayoutInflater().inflate(R.layout.post_items, null);
-            ImageView imageViewPic = view.findViewById(R.id.imageViewPic);
-            TextView textViewName = view.findViewById(R.id.textViewName);
-            TextView textViewWT = view.findViewById(R.id.textViewWT);
-            TextView textViewNoPeep = view.findViewById(R.id.textViewNoPeep);
-            TextView textViewRWT = view.findViewById(R.id.textViewRWT);
-            TextView textViewRNP = view.findViewById(R.id.textViewRNP);
-            TextView textViewPostTime = view.findViewById(R.id.textViewPostTime);
-            CheckBox checkBoxCheers = view.findViewById(R.id.checkBoxCheers);
-            //Assigns values to each List UI
-            textViewName.setText(NAMES[i]);
-            textViewWT.setText("Wait Time: ");
-            textViewNoPeep.setText("Number of People: ");
-            textViewRWT.setText(WAIT[i]);
-            textViewRNP.setText(PEEPS[i]);
-            textViewPostTime.setText(TIME[i]);
-
-            return view;
-        }
-    }
-
-
-    @Override
-    public void onClick(View view) {
-       if (view.getId() == R.id.buttonJoinLine) {
-           //Sending information to Contribution Activity
-           Intent intentContribute = new Intent(this, ActivityContribute.class);
-           String estabPic = textViewEstName.getText().toString();
-           imageViewEstPic.buildDrawingCache();
-           Bitmap pic = imageViewEstPic.getDrawingCache();
-           Bundle extras = new Bundle();
-           extras.putParcelable("pic",pic);
-           intentContribute.putExtra("establishment", estabPic);
-           intentContribute.putExtras(extras);
-           //intentContribute.putExtra("pic", pic);
-           this.startActivity(intentContribute);
-
-       } else if (view.getId() == R.id.imageButtonFavorite){
-           new AlertDialog.Builder(this)
-                   .setMessage("Coming Soon to a TO Class Near You!")
-                   .setNeutralButton("Okay",
-                           new DialogInterface.OnClickListener() {
-                               @Override
-                               public void onClick(DialogInterface dialogInterface, int i) {
-                                   dialogInterface.cancel();
-                               }
-                           })
-                   .show();
-       }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater mainMenuInflator = getMenuInflater();
-        mainMenuInflator.inflate(R.menu.mainmenu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menuHome) {
-            Intent intentHome = new Intent(this, ActivityHome.class);
-            this.startActivity(intentHome);
-        } else if (item.getItemId() == R.id.menuAcct) {
-            Intent intentAcct = new Intent(this, ActivityAcct.class);
-            this.startActivity(intentAcct);
-        } else if (item.getItemId() == R.id.menuLogout) {
-            Intent intentLogout = new Intent(this, MainActivity.class);
-            this.startActivity(intentLogout);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-}
