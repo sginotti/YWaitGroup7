@@ -59,7 +59,7 @@ public class ActivityHome extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_home);
 
         editTextSearch = (EditText) findViewById(R.id.editTextSearch);
-        buttonSearch = (Button) findViewById(R.id.buttonSearch);
+        buttonSearch = (Button) findViewById(R.id.buttonAcct);
         buttonDistSort = (Button) findViewById(R.id.buttonDistSort);
         buttonWaitSort = (Button) findViewById(R.id.buttonWaitSort);
         listViewEstablishments = (ListView) findViewById(R.id.listViewEstablishments);
@@ -173,8 +173,16 @@ public class ActivityHome extends Activity implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
-            Intent intentAcct = new Intent(this, ActivityAcct.class);
-            this.startActivity(intentAcct);
+            if (view.getId() == R.id.buttonAcct){
+                Intent intentAcct = new Intent(this, ActivityAcct.class);
+                this.startActivity(intentAcct);
+            } else if (view.getId() == R.id.buttonDistSort){
+
+
+            } else if (view.getId() == R.id.buttonWaitSort){
+
+            }
+
         }
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {

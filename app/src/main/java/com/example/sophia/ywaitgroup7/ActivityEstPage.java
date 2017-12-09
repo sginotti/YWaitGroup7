@@ -92,9 +92,9 @@ public class ActivityEstPage extends Activity implements View.OnClickListener{
         final long time = System.currentTimeMillis()/1000 - offset;
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        final DatabaseReference mashRef = db.getReference("Mash");
+        final DatabaseReference EstabRef = db.getReference(ActivityHome.keepName);
 
-        mashRef.child("Data2").orderByChild("loginTime").startAt(time).addValueEventListener(new ValueEventListener() {
+        EstabRef.child("Data2").orderByChild("loginTime").startAt(time).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;

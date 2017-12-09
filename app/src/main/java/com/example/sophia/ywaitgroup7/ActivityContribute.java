@@ -76,7 +76,7 @@ public class ActivityContribute extends Activity implements View.OnClickListener
         //String estNode = textViewEstName.getText().toString();
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        final DatabaseReference recordRef = db.getReference("Mash");
+        final DatabaseReference recordRef = db.getReference(ActivityHome.keepName);
 
         if (view.getId() == R.id.buttonContSubmit) {
 
