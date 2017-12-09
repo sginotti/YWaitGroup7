@@ -24,10 +24,14 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -48,15 +52,29 @@ public class ActivityHome extends Activity implements View.OnClickListener {
     public static String keepName;
     public static Integer keepNumber;
 
+    /*public Integer aveWaitTime;
+    public Double totalWaitTime;
+    public String msg;*/
+
     ArrayList<EstabList> arraylist = new ArrayList<EstabList>();
 
     public String[] NAMES = {"Rick's All American Cafe", "Scorekeeper's", "MASH", "LIVE", "Cantina"};
     public int[] IMAGES = {R.drawable.ricks, R.drawable.skeeps, R.drawable.mash, R.drawable.live, R.drawable.cantina};
+    //public String[] TIMES = {calWait(300, NAMES[1]), calWait(300,NAMES[2], calWait(300,NAMES[4],calWait(300,NAMES[4],calWait(300,NAMES[5],);
+
+    /*private String ricks;
+    private String skeeps;
+    private String mash;
+    private String live;
+    private String cantina;*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //cantina = calWait(300, "Cantina");
 
         editTextSearch = (EditText) findViewById(R.id.editTextSearch);
         buttonSearch = (Button) findViewById(R.id.buttonAcct);
@@ -97,16 +115,16 @@ public class ActivityHome extends Activity implements View.OnClickListener {
             public void afterTextChanged(Editable editable) {
                 String text = editTextSearch.getText().toString().toLowerCase(Locale.getDefault());
                 customAdapter.filter(text);
-
             }
         });
     }
 
-    class CustomAdapter extends BaseAdapter  {
+    class CustomAdapter extends BaseAdapter {
         Context mContext;
         LayoutInflater inflater;
         private List<EstabList> establishmentlist = null;
         private ArrayList<EstabList> arraylist;
+
         public CustomAdapter(Context context, List<EstabList> establishmentlist) {
             mContext = context;
             this.establishmentlist = establishmentlist;
@@ -114,24 +132,29 @@ public class ActivityHome extends Activity implements View.OnClickListener {
             this.arraylist = new ArrayList<EstabList>();
             this.arraylist.addAll(establishmentlist);
         }
+
         public class ViewHolder {
             TextView name;
             TextView dnum;
             TextView wnum;
             ImageView pic;
         }
+
         @Override
         public int getCount() {
             return establishmentlist.size();
         }
+
         @Override
         public EstabList getItem(int i) {
             return establishmentlist.get(i);
         }
+
         @Override
         public long getItemId(int i) {
             return i;
         }
+
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             final ViewHolder holder;
@@ -155,6 +178,7 @@ public class ActivityHome extends Activity implements View.OnClickListener {
 
             return view;
         }
+
         public void filter(String charText) {
             charText = charText.toLowerCase(Locale.getDefault());
             establishmentlist.clear();
@@ -171,35 +195,83 @@ public class ActivityHome extends Activity implements View.OnClickListener {
         }
     }
 
-        @Override
-        public void onClick(View view) {
-            if (view.getId() == R.id.buttonAcct){
-                Intent intentAcct = new Intent(this, ActivityAcct.class);
-                this.startActivity(intentAcct);
-            } else if (view.getId() == R.id.buttonDistSort){
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.buttonAcct) {
+            Intent intentAcct = new Intent(this, ActivityAcct.class);
+            this.startActivity(intentAcct);
+        } else if (view.getId() == R.id.buttonDistSort) {
 
-
-            } else if (view.getId() == R.id.buttonWaitSort){
-
-            }
+        } else if (view.getId() == R.id.buttonWaitSort) {
 
         }
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            MenuInflater homeMenuInflater = getMenuInflater();
-            homeMenuInflater.inflate(R.menu.homemenu, menu);
-            return super.onCreateOptionsMenu(menu);
-        }
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            if (item.getItemId() == R.id.menuAcct) {
-                Intent intentAcct = new Intent(this, ActivityAcct.class);
-                this.startActivity(intentAcct);
-            } else if (item.getItemId() == R.id.menuLogout) {
-                Intent intentLogout = new Intent(this, MainActivity.class);
-                this.startActivity(intentLogout);
-            }
-            return super.onOptionsItemSelected(item);
-        }
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater homeMenuInflater = getMenuInflater();
+        homeMenuInflater.inflate(R.menu.homemenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menuAcct) {
+            Intent intentAcct = new Intent(this, ActivityAcct.class);
+            this.startActivity(intentAcct);
+        } else if (item.getItemId() == R.id.menuLogout) {
+            Intent intentLogout = new Intent(this, MainActivity.class);
+            this.startActivity(intentLogout);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}
+
+    /*public void calWait(long offset, final String name) {
+        totalWaitTime = 0.0;
+        msg = "";
+        final long time = System.currentTimeMillis() / 1000 - offset;
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        final DatabaseReference EstabRef = db.getReference(name);
+
+        EstabRef.child("Data2").orderByChild("loginTime").startAt(time).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                int j = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.child("waitTime").getValue() != null) {
+
+                        String wt = snapshot.child("waitTime").getValue().toString();
+                        int foundWaitTime = Integer.parseInt(wt);
+                        i = i + 1;
+                        totalWaitTime += foundWaitTime;
+                    }
+
+                }
+                // if no fresh records (see offet)
+                // then checking all the records made in the last week
+                if ((totalWaitTime == 0)) {
+                    calWait(60 * 60 * 24 * 7, name);
+                } else {
+                    aveWaitTime = (int) Math.ceil(totalWaitTime / i);
+                    String msg = String.valueOf(aveWaitTime / 60) + "h " + String.valueOf(aveWaitTime % 60) + "m";
+                    //textViewWaitNum.setText(msg);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+    }
+
+
+}*/
+
+
 

@@ -36,6 +36,7 @@ import java.util.Calendar;
 
 import static java.lang.Math.ceil;
 
+
 public class ActivityEstPage extends Activity implements View.OnClickListener{
 
     private ImageView imageViewEstPic;
