@@ -1,7 +1,9 @@
 package com.example.sophia.ywaitgroup7;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -201,8 +203,27 @@ public class ActivityHome extends Activity implements View.OnClickListener {
             Intent intentAcct = new Intent(this, ActivityAcct.class);
             this.startActivity(intentAcct);
         } else if (view.getId() == R.id.buttonDistSort) {
-
+            new AlertDialog.Builder(this)
+                    .setMessage("Coming Soon to a TO Class Near You!")
+                    .setNeutralButton("Okay",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            })
+                    .show();
         } else if (view.getId() == R.id.buttonWaitSort) {
+            new AlertDialog.Builder(this)
+                    .setMessage("Coming Soon to a TO Class Near You!")
+                    .setNeutralButton("Okay",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            })
+                    .show();
 
         }
 
