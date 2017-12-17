@@ -54,21 +54,20 @@ public class ActivityHome extends Activity implements View.OnClickListener {
     public static String keepName;
     public static Integer keepNumber;
 
-    /*public Integer aveWaitTime;
-    public Double totalWaitTime;
-    public String msg;*/
+
+    //See note at bottom of page//
+        /*public Integer aveWaitTime;
+        public Double totalWaitTime;
+        public String msg;*/
 
     ArrayList<EstabList> arraylist = new ArrayList<EstabList>();
 
     public String[] NAMES = {"Rick's All American Cafe", "Scorekeeper's", "MASH", "LIVE", "Cantina"};
     public int[] IMAGES = {R.drawable.ricks, R.drawable.skeeps, R.drawable.mash, R.drawable.live, R.drawable.cantina};
-    //public String[] TIMES = {calWait(300, NAMES[1]), calWait(300,NAMES[2], calWait(300,NAMES[4],calWait(300,NAMES[4],calWait(300,NAMES[5],);
 
-    /*private String ricks;
-    private String skeeps;
-    private String mash;
-    private String live;
-    private String cantina;*/
+    //See note at bottom of page//
+        //public String[] TIMES = {calWait(300, NAMES[1]), calWait(300,NAMES[2], calWait(300,NAMES[4],calWait(300,NAMES[4],calWait(300,NAMES[5],);
+
 
 
     @Override
@@ -76,7 +75,8 @@ public class ActivityHome extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //cantina = calWait(300, "Cantina");
+        //See note at bottom of page//
+            //cantina = calWait(300, "Cantina");
 
         editTextSearch = (EditText) findViewById(R.id.editTextSearch);
         buttonSearch = (Button) findViewById(R.id.buttonAcct);
@@ -249,6 +249,12 @@ public class ActivityHome extends Activity implements View.OnClickListener {
     }
 }
 
+    /*NOTE: Ideally we would have liked to populate the home page list with real wait time data
+        but were unable to get the feature to work in time for the submission. Below is the code we
+        were playing around with. In order to populate the ListView we though we could call
+        this method in the list. In our preliminary tests we could not get even a toast to appear
+        that would display one of the aggregated wait times.*/
+
     /*public void calWait(long offset, final String name) {
         totalWaitTime = 0.0;
         msg = "";
@@ -280,7 +286,6 @@ public class ActivityHome extends Activity implements View.OnClickListener {
                     aveWaitTime = (int) Math.ceil(totalWaitTime / i);
                     String msg = String.valueOf(aveWaitTime / 60) + "h " + String.valueOf(aveWaitTime % 60) + "m";
                     //textViewWaitNum.setText(msg);
-
                 }
             }
 
